@@ -1,0 +1,27 @@
+<html>
+	<body>
+		<p id="angle"></p>
+	</body>
+</html>
+<script type="text/javascript">
+	window.onload=function(){
+		var text = 'hello';
+		var data = document.getElementById("angle");
+		const xhr = new XMLHttpRequest();
+		var POLLING_TIME = 100;
+		console.log('loaded');
+		polling();
+		function polling(){
+			getText();
+			window.setTimeout(polling, POLLING_TIME);
+		}
+
+		function getText(){
+				xhr.open("GET", '/roll');
+				xhr.addEventListener("load", (event) => {
+					data.innerHTML = "<p>"+event.target.responseText+"</p>";
+				});
+				xhr.send();
+		}
+	}
+</script>
