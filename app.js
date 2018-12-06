@@ -3,7 +3,7 @@ var express = require("express");
 var bebop = drone.createClient();
 var app = express();
 
-var data = 0;
+var roll = 0, pitch = 0, yaw = 0;
 
 var server = app.listen(3000, function(){
 	console.log("Node.js is listening on port 3000.");
@@ -13,8 +13,19 @@ app.set('view engine', 'ejs');
 
 app.get("/roll", function(req, res, next) {
 	res.set('Content-Type', 'text/html');
-	res.send('the angle is ' + data);
-	console.log('data is ' + data);
+	res.send('the roll is ' + roll);
+});
+
+
+app.get("/pitch", function(req, res, next) {
+	res.set('Content-Type', 'text/html');
+	res.send('the pitch is ' + pitch);
+});
+
+
+app.get("/yaw", function(req, res, next) {
+	res.set('Content-Type', 'text/html');
+	res.send('the yaw is ' + yaw);
 });
 
 app.get("/", function(req, res, next) {
@@ -25,8 +36,12 @@ bebop.connect(function() {
 	bebop.on('ready', function(){
     	bebop.Piloting.flatTrim();
         bebop.on('AttitudeChanged', function(attitude) {
-        	data = Math.round(attitude.roll * 57.2958);
-            if(data == -0) data = 0;
+        	roll = Math.round(attitude.roll * 57.2958);
+        	pitch = Math.round(attitude.pitch * 57.2958);
+        	yaw = Math.round(attitude.yaw * 57.2958);
+            if(roll == -0) roll = 0;
+			if(pitch == -0) pitch = 0;
+			if(yaw == -0) yaw = 0;
         });
     });
 });

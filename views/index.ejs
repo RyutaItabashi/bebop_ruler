@@ -1,13 +1,18 @@
 <html>
 	<body>
-		<p id="angle"></p>
+		<p id="roll"></p>
+		<p id="pitch"></p>
+		<p id="yaw"></p>
 	</body>
 </html>
 <script type="text/javascript">
 	window.onload=function(){
-		var text = 'hello';
-		var data = document.getElementById("angle");
-		const xhr = new XMLHttpRequest();
+		var toR = document.getElementById("roll");
+		var toP = document.getElementById("pitch");
+		var toY = document.getElementById("yaw");
+		const xhr_r = new XMLHttpRequest();
+		const xhr_p = new XMLHttpRequest();
+		const xhr_y = new XMLHttpRequest();
 		var POLLING_TIME = 100;
 		console.log('loaded');
 		polling();
@@ -17,11 +22,23 @@
 		}
 
 		function getText(){
-				xhr.open("GET", '/roll');
-				xhr.addEventListener("load", (event) => {
-					data.innerHTML = "<p>"+event.target.responseText+"</p>";
+				xhr_r.open("GET", '/roll');
+				xhr_r.addEventListener("load", (event) => {
+					toR.innerHTML = "<p>"+event.target.responseText+"</p>";
 				});
-				xhr.send();
+				xhr_r.send();
+				
+				xhr_p.open("GET", '/pitch');
+				xhr_p.addEventListener("load", (event) => {
+					toP.innerHTML = "<p>"+event.target.responseText+"</p>";
+				});
+				xhr_p.send();
+			
+				xhr_y.open("GET", '/yaw');
+				xhr_y.addEventListener("load", (event) => {
+					toY.innerHTML = "<p>"+event.target.responseText+"</p>";
+				});
+				xhr_y.send();
 		}
 	}
 </script>
