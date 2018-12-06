@@ -1,0 +1,22 @@
+{
+  "name": "bebop_ruler",
+  "version": "1.0.0",
+  "description": "make Bebop Drone a ruler!",
+  "main": "index.js",
+  "scripts": {
+    "test": "start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/car4ryu/bebop_ruler.git"
+  },
+  "author": "car4ryu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/car4ryu/bebop_ruler/issues"
+  },
+  "homepage": "https://github.com/car4ryu/bebop_ruler#readme",
+  "dependencies": {
+    "node-bebop": "^0.6.0"
+  }
+}
